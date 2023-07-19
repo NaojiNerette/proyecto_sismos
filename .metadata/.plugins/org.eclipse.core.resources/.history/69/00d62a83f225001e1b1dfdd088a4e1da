@@ -1,0 +1,47 @@
+package com.jbascur.springboot.app.eventos.services;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.jbascur.springboot.app.eventos.models.EventDao;
+import com.jbascur.springboot.app.eventos.models.entity.Event;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Slf4j
+public class SismosEventService implements ISismosEventService {
+
+	@Autowired
+	private EventDao eventDao;
+
+	@PostConstuct
+	public void CargaDatos() {
+
+		ResponseEntity<HashMap> eventos = 
+				clienteRest.exchange("https://api.xor.cl/sismo/recent", 
+							HttpMethod.GET,
+							HttpEntity.EMPTY,
+							new ParameterizedTypeReference<HashMap>() {
+							}
+				);
+	
+		List<Event> listaEventos = (List<Event>)eventos.getBody().get("events");
+		System.out.println(eventos);
+		listaEventos.stream().forEach(evento -> eventDao.save(evento));
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Event> findAll() {
+		return (List<Event>) eventDao.findAll();
+	}
+
+}

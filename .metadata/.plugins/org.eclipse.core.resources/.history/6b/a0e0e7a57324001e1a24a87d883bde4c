@@ -1,0 +1,15 @@
+package com.jbascur.springboot.app.eventos.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.jbascur.springboot.app.eventos.services.SismosEventService;
+
+@RestController
+public class EventController {
+	
+	@Autowired 
+	SismosEventService sismosEventService;
+	
+
+}

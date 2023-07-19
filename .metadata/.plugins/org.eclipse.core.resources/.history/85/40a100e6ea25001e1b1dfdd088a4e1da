@@ -1,0 +1,6 @@
+package com.jbascur.springboot.app.eventos.services;
+
+public interface IDatosService {
+
+	public void CargaDatos();
+}

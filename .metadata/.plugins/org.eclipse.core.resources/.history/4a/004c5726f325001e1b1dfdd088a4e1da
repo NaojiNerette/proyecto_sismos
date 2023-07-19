@@ -1,0 +1,10 @@
+package com.jbascur.springboot.app.eventos.services;
+
+import java.util.List;
+
+import com.jbascur.springboot.app.eventos.models.entity.Event;
+
+public interface ISismosEventService {
+	public void init();
+	public List<Event> findAll();
+}

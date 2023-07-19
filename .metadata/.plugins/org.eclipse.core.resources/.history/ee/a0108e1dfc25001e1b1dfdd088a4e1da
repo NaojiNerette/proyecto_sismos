@@ -1,0 +1,43 @@
+package com.jbascur.springboot.app.eventos.models.entity;
+
+import java.io.Serializable;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "events")
+public class Event implements Serializable {
+
+	@Id
+	private Long id;
+	
+	private String url;
+	
+	@Column(name = "map_url")
+	private String mapUrl;
+	
+	@Column(name = "local_date")
+	private String localDate;
+	
+	@Column(name = "utc_date")
+	private String utcDate;
+	
+	private Double latitude;
+	
+	private Double longitude;
+	
+	private String magnitude;
+	
+	@Column(name = "geo_reference")
+	private String geoReference;
+
+	
+	private static final long serialVersionUID = 1L;
+}

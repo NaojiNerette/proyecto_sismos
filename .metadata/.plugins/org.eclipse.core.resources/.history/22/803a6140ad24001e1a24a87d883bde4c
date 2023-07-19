@@ -1,0 +1,112 @@
+package com.jbascur.springboot.app.eventos.models.entity;
+
+import java.io.Serializable;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "events")
+public class Event implements Serializable {
+
+	@Id
+	private Long id;
+	
+	private String url;
+	
+	@Column(name = "map_url")
+	private String mapUrl;
+	
+	@Column(name = "local_date")
+	private String localDate;
+	
+	@Column(name = "utc_date")
+	private String utcDate;
+	
+	private Double latitude;
+	
+	private Double longitude;
+	
+	private String magnitude;
+	
+	@Column(name = "geo_reference")
+	private String geoReference;
+
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getMapUrl() {
+		return mapUrl;
+	}
+
+	public void setMapUrl(String mapUrl) {
+		this.mapUrl = mapUrl;
+	}
+
+	public String getLocalDate() {
+		return localDate;
+	}
+
+	public void setLocalDate(String localDate) {
+		this.localDate = localDate;
+	}
+
+	public String getUtcDate() {
+		return utcDate;
+	}
+
+	public void setUtcDate(String utcDate) {
+		this.utcDate = utcDate;
+	}
+
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getMagnitude() {
+		return magnitude;
+	}
+
+	public void setMagnitude(String magnitude) {
+		this.magnitude = magnitude;
+	}
+
+	public String getGeoReference() {
+		return geoReference;
+	}
+
+	public void setGeoReference(String geoReference) {
+		this.geoReference = geoReference;
+	}
+	
+	private static final long serialVersionUID = 1L;
+}

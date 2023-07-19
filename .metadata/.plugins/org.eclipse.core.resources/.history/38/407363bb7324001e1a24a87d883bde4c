@@ -1,0 +1,31 @@
+package com.jbascur.springboot.app.eventos.controllers;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.jbascur.springboot.app.eventos.models.entity.Event;
+import com.jbascur.springboot.app.eventos.services.SismosEventService;
+
+
+@RestController
+public class EventController {
+	
+	
+	@Autowired 
+	SismosEventService sismosEventService;
+	
+	@GetMapping("/listar")
+	public ArrayList<Event> listar(){
+		
+		ArrayList<Event> resultado = new ArrayList<Event>();
+		
+		resultado = sismosEventService.listarEventos();
+		
+		
+	}
+	
+
+}

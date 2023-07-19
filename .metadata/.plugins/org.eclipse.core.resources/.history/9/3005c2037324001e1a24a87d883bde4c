@@ -1,0 +1,8 @@
+package com.jbascur.springboot.app.eventos.controllers;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class EventController {
+
+}

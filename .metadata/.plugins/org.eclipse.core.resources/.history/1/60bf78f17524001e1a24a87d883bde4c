@@ -1,0 +1,3 @@
+spring.application.name=servicio-eventos
+server.port=${PORT:0}
+

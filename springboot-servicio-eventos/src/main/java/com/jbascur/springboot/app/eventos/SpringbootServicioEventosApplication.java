@@ -1,0 +1,14 @@
+package com.jbascur.springboot.app.eventos;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringbootServicioEventosApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringbootServicioEventosApplication.class, args);
+
+	}
+
+}
