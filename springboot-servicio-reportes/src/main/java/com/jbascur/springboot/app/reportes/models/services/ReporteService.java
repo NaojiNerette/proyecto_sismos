@@ -3,6 +3,7 @@ package com.jbascur.springboot.app.reportes.models.services;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
@@ -26,7 +27,7 @@ public class ReporteService implements IReporteService{
 	@Override
 	public List<Evento> eventosOriginal() {
 		List<Evento> eventos = Arrays.asList(
-				clienteRest.getForObject("http://localhost:8090/eventos/listar", Evento[].class));
+				clienteRest.getForObject("http://servicio-eventos/eventos/listar", Evento[].class));
 		
 		return eventos;
 	}
@@ -34,25 +35,25 @@ public class ReporteService implements IReporteService{
 	@Override
 	public Reporte reporteEventosPorMagnitud() {
 		List<Evento> eventos = Arrays.asList(
-				clienteRest.getForObject("http://localhost:8090/eventos/listar", Evento[].class));
+				clienteRest.getForObject("http://servicio-eventos/eventos/listar", Evento[].class));
 		
 		List<ResumenMagnitud> resumenes = eventos.stream()
 				.map(evento -> {
-					
-					List<String> detalle = new ArrayList<String>();
+					List<HashMap<String, String>> detalle = new ArrayList<HashMap<String, String>>();
 					String cadenaEvento =  evento.getId().toString()
 							.concat(" - ").concat(evento.getGeoReference())
 							.concat(" - ").concat(evento.getLocalDate())
 							.concat(" - ").concat(evento.getUtcDate());
 					
+					valorMagnitud.set(evento.getMagnitude_valor().longValue());
+
+					HashMap<String, String> hash1 = new HashMap<String, String>();
+					hash1.put("georeference", evento.getGeoReference());
+					hash1.put("localdate", evento.getLocalDate());
+					hash1.put("utcDate", evento.getUtcDate());
 					
-					//if(valorMagnitud.get() != evento.getMagnitude_valor().longValue())
-					//{
-						valorMagnitud.set(evento.getMagnitude_valor().longValue());
-						detalle.add(cadenaEvento);
-						return new ResumenMagnitud(evento.getMagnitude_valor(), detalle);	
-					//}	
-					
+					detalle.add(hash1);
+					return new ResumenMagnitud(evento.getMagnitude_valor(), detalle);		
 				})
 				.collect(Collectors.toList());
 		
