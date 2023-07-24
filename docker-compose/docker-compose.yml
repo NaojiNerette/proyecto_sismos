@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+  config-server:
+    image: config-server:v1
+    ports:
+      - "8888:8888"
+    restart: always
+    networks:
+      - springcloud
+  eureka-server:
+    image: eureka-server:1
+    ports:
+      - "8761:8761"
+    restart: always
+    networks:
+      - springcloud
+  servicio-eventos:
+    image: servicio-eventos:v1
+    ports:
+      - "8090:8090"
+    restart: always
+    networks:
+      - springcloud
+    depends_on:
+      - config-server
+      - eureka-server
+  servicio-reportes:
+    image: servicio-reportes:v1
+    ports:
+      - "8011:8011"
+      - "8091:8091"
+      - "9001:9001"
+    restart: always
+    networks:
+      - springcloud
+    depends_on:
+      - config-server
+      - eureka-server
+      - servicio-eventos
+networks:
+  springcloud:
